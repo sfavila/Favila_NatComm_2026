@@ -1,0 +1,33 @@
+# Pinned to match the lab's internal MGVS-release-2022 conda environment --
+# the environment this release's precompute scripts, figure notebooks, and
+# tests were actually run and validated against (see environment.yml) -- so
+# this code reproduces the manuscript's reported numbers rather than
+# approximating them under different library versions. nilearn==0.9.0 in
+# particular is load-bearing: precompute/glm_loc_resids.py's output does not
+# match under newer nilearn (confirmed directly; a newer env this project
+# also used, without the "-2022" suffix, pins nilearn 0.10.4 and reproduces
+# figures but not the GLM precompute step).
+#
+# Requires Python 3.8 (see README "Setup"): numpy/scipy/pandas/nibabel/
+# nilearn/matplotlib/seaborn/nbformat/nbclient/ipykernel below are not
+# compatible with newer Python at these exact versions. pytest is release
+# tooling only, not part of the original analysis -- pinned only for
+# Python 3.8 compatibility, no reproducibility constraint. pyarrow is also
+# not part of the original analysis -- it's the Parquet engine for
+# precompute/fig4_glm_resids_aggregate.py's internal per-vertex merged
+# files (too large for CSV to be practical), never read by any figure
+# notebook, so it carries no reproducibility constraint either.
+numpy==1.21.2
+pandas==2.0.3
+scipy==1.7.1
+matplotlib==3.7.5
+seaborn==0.13.2
+statsmodels==0.13.2
+pingouin==0.5.2
+nibabel==3.2.1
+nilearn==0.9.0
+nbclient==0.5.4
+nbformat==5.1.3
+ipykernel==6.4.1
+pytest==7.4.4
+pyarrow==17.0.0
